@@ -1,4 +1,8 @@
-var ngPaginationTpl = [
+angular.module('ngPagination', [])
+.directive('ngPagination', function () {
+  return {
+    restrict: 'AE',
+    template: [
 '<nav>',
 '  <ul class="pagination">',
 '    <li ng-click="prev()" ng-class="{disabled:+currentPage===0}">',
@@ -6,7 +10,8 @@ var ngPaginationTpl = [
 '        <span aria-hidden="true">&laquo;</span>',
 '      </a>',
 '    </li>',
-'    <li ng-click="setPage($index)"',
+'    <li ng-if="_needShow($index)"',
+'        ng-click="setPage($index)"',
 '        ng-class="{active:+currentPage===$index}"',
 '        ng-repeat="page in pages track by $index">',
 '      <a href="#">{{$index+1}}</a>',
@@ -19,13 +24,7 @@ var ngPaginationTpl = [
 '    </li>',
 '  </ul>',
 '</nav>'
-].join('');
-
-angular.module('ngPagination', [])
-.directive('ngPagination', function () {
-  return {
-    restrict: 'AE',
-    template: ngPaginationTpl,
+].join(''),
     scope: {
       currentPage: '=?',
       totalPages: '=',
@@ -52,6 +51,20 @@ angular.module('ngPagination', [])
       // 下一页
       scope.next = function () {
         scope.currentPage = scope.currentPage < scope.totalPages - 1 ? scope.currentPage + 1 : scope.currentPage;
+      };
+
+      // 判断当前页码是否需要显示
+      scope._needShow = function (index) {
+        if (scope.totalPages < 13) {
+          return true;
+        }
+        var offset = 0;
+        offset = scope.currentPage < 6
+          ? 6 - scope.currentPage
+          : (scope.currentPage + 6) > (scope.totalPages - 1)
+            ? (scope.totalPages - scope.currentPage - 7)
+            : 0;
+        return ((index > scope.currentPage - 6 + offset) && (index < scope.currentPage + 6 + offset)) || (index===0) || (index===scope.totalPages-1);
       };
 
       // 页码变化触发onchange事件

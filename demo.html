@@ -16,11 +16,10 @@
     <script>
         angular.module('MyApp', ['ngPagination'])
         .controller('GlobalController', function ($scope, $timeout) {
-          $scope.totalPages = 10;
-          $scope.currentPage = 5;
+          $scope.totalPages = 50;
+          $scope.currentPage = 10;
           $scope.onchange = function (currentPage, originalPage) {
             console.log('当前页码是:' + currentPage);
-            $scope.totalPages++;
           };
         });
     </script>
