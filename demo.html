@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="MyApp" ng-controller="GlobalController as g">
+    <head>
+        <meta charset="utf-8">
+        <title>A Brand New App</title>
+        <style data-statement="请勿删除这些样式">.ng-cloak,[ng-cloak]{visibility:hidden!important;opacity:0!important;display:block!important;-webkit-transform:scale(0)!important;-ms-transform:scale(0)!important;transform:scale(0)!important}.container-fluid.capture-main{padding-top:10px;padding-bottom:10px}</style>
+        <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div ng-pagination total-pages="totalPages" current-page="currentPage" onchange="onchange"></div>
+    </body>
+    <script src="//cdn.bootcss.com/angular.js/1.4.7/angular.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="ng-pagination.js"></script>
+    <script>
+        angular.module('MyApp', ['ngPagination'])
+        .controller('GlobalController', function ($scope, $timeout) {
+          $scope.totalPages = 10;
+          $scope.currentPage = 5;
+          $scope.onchange = function (currentPage, originalPage) {
+            console.log('当前页码是:' + currentPage);
+            $scope.totalPages++;
+          };
+        });
+    </script>
+</html>
