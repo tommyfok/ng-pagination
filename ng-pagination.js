@@ -1,4 +1,11 @@
-angular.module('ngPagination', [])
+// ready for browserify / webpack
+var global = global || window;
+var require = require || function (id) {return global[id]};
+var module = module || {exports: {}};
+module.exports = module.exports || {};
+// main code
+var angular = require('angular');
+module.exports = angular.module('ngPagination', [])
 .directive('ngPagination', function () {
   return {
     restrict: 'AE',
