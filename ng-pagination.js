@@ -23,7 +23,7 @@ angular.module('ngPagination', [])
 '      </a>',
 '    </li>',
 '  </ul>',
-'  <form class="ng-pagination-input" ng-if="showInput" ng-submit="setPage(inputPage-1)">',
+'  <form class="ng-pagination-input" ng-if="!hideInput" ng-submit="setPage(inputPage-1)">',
 '    共{{totalPages}}页，转到第',
 '    <input type="number" class="form-control" placeholder="页码" ng-model="inputPage"> 页',
 '    <button class="btn btn-primary" type="submit">Go!</button>',
@@ -34,7 +34,7 @@ angular.module('ngPagination', [])
       currentPage: '=?',
       totalPages: '=',
       onchange: '=?',
-      showInput: '=?'
+      hideInput: '=?'
     },
     link: function (scope, elem, attrs) {
       // 初始化
