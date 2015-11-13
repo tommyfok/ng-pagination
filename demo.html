@@ -8,10 +8,29 @@
         <link href="ng-pagination.css" rel="stylesheet">
     </head>
     <body>
-        <div ng-pagination
-             onchange="onchange"
-             total-pages="totalPages"
-             current-page="currentPage"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>小尺寸：<small>size="sm"</small></h5>
+                    <div ng-pagination
+                         size="sm"
+                         onchange="onchange"
+                         total-pages="totalPages"
+                         current-page="currentPage"></div>
+
+                    <h4>普通尺寸：</h4>
+                    <div ng-pagination
+                         total-pages="totalPages"
+                         current-page="currentPage"></div>
+
+                    <h3>大尺寸：<small>size="sm"</small></h3>
+                    <div ng-pagination
+                         size="lg"
+                         total-pages="totalPages"
+                         current-page="currentPage"></div>
+                </div>
+            </div>
+        </div>
     </body>
     <script src="//cdn.bootcss.com/angular.js/1.4.7/angular.min.js"></script>
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>

@@ -4,7 +4,7 @@ angular.module('ngPagination', [])
     restrict: 'AE',
     template: [
 '<div class="ng-pagination">',
-'  <ul class="pagination pull-left">',
+'  <ul class="pagination {{size ? \'pagination-\' + size : \'\'}} pull-left">',
 '    <li ng-click="prev()" ng-class="{disabled:+currentPage===0}">',
 '      <a href="#" aria-label="Previous">',
 '        <span aria-hidden="true">&laquo;</span>',
@@ -25,8 +25,8 @@ angular.module('ngPagination', [])
 '  </ul>',
 '  <form class="ng-pagination-input" ng-if="!hideInput" ng-submit="setPage(inputPage-1)">',
 '    共{{totalPages}}页，转到第',
-'    <input type="number" class="form-control" placeholder="页码" ng-model="inputPage"> 页',
-'    <button class="btn btn-primary" type="submit">Go!</button>',
+'    <input type="number" class="form-control {{size ? \'input-\' + size : \'\'}}" placeholder="页码" ng-model="inputPage"> 页',
+'    <button class="btn btn-primary {{size ? \'btn-\' + size : \'\'}}" type="submit">Go!</button>',
 '  </form>',
 '</div>'
 ].join(''),
@@ -34,7 +34,8 @@ angular.module('ngPagination', [])
       currentPage: '=?',
       totalPages: '=',
       onchange: '=?',
-      hideInput: '=?'
+      hideInput: '=?',
+      size: '@?'
     },
     link: function (scope, elem, attrs) {
       // 初始化
