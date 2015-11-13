@@ -8,7 +8,7 @@ simple pagination component
 
 ```
 <div ng-pagination
-     size="lg"
+     size="sm"
      total-pages="50"
      current-page="10"
      hide-input="false"
@@ -17,7 +17,7 @@ simple pagination component
 
 - `total-pages` 传入总页数
 - `size` 组件尺寸，可选`lg`/`sm`，留空为普通尺寸
-- `current-page` 传入当前页码（以0开始）
+- `current-page` 传入当前页码
 - `hide-input` 是否隐藏页码输入框
 - `onchange` 页码改变时的回调，依次传入两个参数
   - `currentPage` 当前页码
