@@ -5,9 +5,14 @@
         <title>A Brand New App</title>
         <style data-statement="请勿删除这些样式">.ng-cloak,[ng-cloak]{visibility:hidden!important;opacity:0!important;display:block!important;-webkit-transform:scale(0)!important;-ms-transform:scale(0)!important;transform:scale(0)!important}.container-fluid.capture-main{padding-top:10px;padding-bottom:10px}</style>
         <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <link href="ng-pagination.css" rel="stylesheet">
     </head>
     <body>
-        <div ng-pagination total-pages="totalPages" current-page="currentPage" onchange="onchange"></div>
+        <div ng-pagination
+             show-input="true"
+             onchange="onchange"
+             total-pages="totalPages"
+             current-page="currentPage"></div>
     </body>
     <script src="//cdn.bootcss.com/angular.js/1.4.7/angular.min.js"></script>
     <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>

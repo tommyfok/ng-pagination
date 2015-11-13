@@ -3,8 +3,8 @@ angular.module('ngPagination', [])
   return {
     restrict: 'AE',
     template: [
-'<nav>',
-'  <ul class="pagination">',
+'<div class="ng-pagination">',
+'  <ul class="pagination pull-left">',
 '    <li ng-click="prev()" ng-class="{disabled:+currentPage===0}">',
 '      <a href="#" aria-label="Previous">',
 '        <span aria-hidden="true">&laquo;</span>',
@@ -23,16 +23,23 @@ angular.module('ngPagination', [])
 '      </a>',
 '    </li>',
 '  </ul>',
-'</nav>'
+'  <form class="ng-pagination-input" ng-if="showInput" ng-submit="setPage(inputPage-1)">',
+'    共{{totalPages}}页，转到第',
+'    <input type="number" class="form-control" placeholder="页码" ng-model="inputPage"> 页',
+'    <button class="btn btn-primary" type="submit">Go!</button>',
+'  </form>',
+'</div>'
 ].join(''),
     scope: {
       currentPage: '=?',
       totalPages: '=',
-      onchange: '=?'
+      onchange: '=?',
+      showInput: '=?'
     },
     link: function (scope, elem, attrs) {
       // 初始化
       scope.currentPage = scope.currentPage || 0;
+      scope.inputPage = scope.currentPage + 1;
       scope.onchange = scope.onchange || angular.noop;
 
       // 生成页辅助数组
@@ -40,7 +47,11 @@ angular.module('ngPagination', [])
 
       // 设置页码
       scope.setPage = function (page) {
-        scope.currentPage = page;
+        scope.currentPage = page < 0
+          ? 0
+          : page > scope.totalPages - 1
+            ? scope.totalPages - 1
+            : page;
       };
 
       // 上一页
@@ -55,22 +66,26 @@ angular.module('ngPagination', [])
 
       // 判断当前页码是否需要显示
       scope._needShow = function (index) {
-        if (scope.totalPages < 13) {
+        // aside意为当前页码双侧各显示多少个页码
+        var aside = 5;
+        if (scope.totalPages < (aside * 2 + 1)) {
           return true;
         }
-        var offset = 0;
-        offset = scope.currentPage < 6
-          ? 6 - scope.currentPage
-          : (scope.currentPage + 6) > (scope.totalPages - 1)
-            ? (scope.totalPages - scope.currentPage - 7)
+        var offset = scope.currentPage < aside
+          ? aside - scope.currentPage
+          : (scope.currentPage + aside) > (scope.totalPages - 1)
+            ? (scope.totalPages - scope.currentPage - aside - 1)
             : 0;
-        return ((index > scope.currentPage - 6 + offset) && (index < scope.currentPage + 6 + offset)) || (index===0) || (index===scope.totalPages-1);
+        return ((index > scope.currentPage - aside + offset)
+               && (index < scope.currentPage + aside + offset)) || (index === 0)
+               || (index === scope.totalPages - 1);
       };
 
       // 页码变化触发onchange事件
       scope.$watch('currentPage', function (currentPage, originalPage) {
         if (currentPage != originalPage) {
           scope.onchange(currentPage, originalPage);
+          scope.inputPage = scope.currentPage + 1;
         }
       });
 

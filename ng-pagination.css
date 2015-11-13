@@ -1,0 +1,23 @@
+.ng-pagination {
+    padding: 10px;
+}
+
+.ng-pagination .pagination {
+    margin: 0;
+    display: inline-block;
+}
+
+.ng-pagination-input {
+    margin: 0;
+    padding: 0;
+    margin-left: 20px;
+    color: #999;
+    display: inline-block;
+}
+
+.ng-pagination-input input.form-control {
+    width: 90px;
+    display: inline-block;
+    color: #333;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 {
   "name": "ng-pagination",
-  "main": "ng-pagination.js",
+  "main": ["ng-pagination.js", "ng-pagination.css"],
   "version": "0.0.1",
   "homepage": "https://github.com/tommyfok/ng-pagination",
   "authors": [
