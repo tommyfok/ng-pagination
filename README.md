@@ -20,3 +20,7 @@ simple pagination component
 - `onchange` 页码改变时的回调，依次传入两个参数
   - `currentPage` 当前页码
   - `originalPage` 之前的页码
+
+## Deps
+- angular: 1.3+
+- bootstrap: 3.3+
