@@ -8,23 +8,26 @@
         <link href="ng-pagination.css" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <h5>小尺寸：<small>size="sm"</small></h5>
+                    <h3>小尺寸：<small>size="sm"</small></h3>
                     <div ng-pagination
                          size="sm"
                          onchange="onchange"
+                         onsizechange="onsizechange"
                          total-pages="totalPages"
                          current-page="currentPage"></div>
 
-                    <h4>普通尺寸：</h4>
+                    <h3>普通尺寸：</h3>
                     <div ng-pagination
+                         onsizechange="onsizechange"
                          total-pages="totalPages"
                          current-page="currentPage"></div>
 
                     <h3>大尺寸：<small>size="sm"</small></h3>
                     <div ng-pagination
+                         onsizechange="onsizechange"
                          size="lg"
                          total-pages="totalPages"
                          current-page="currentPage"></div>
@@ -43,6 +46,9 @@
           $scope.currentPage = 10;
           $scope.onchange = function (currentPage, originalPage) {
             console.log('当前页码是:' + currentPage);
+          };
+          $scope.onsizechange = function (newSize) {
+            console.log('每页显示', newSize);
           };
         });
     </script>

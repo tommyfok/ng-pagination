@@ -4,6 +4,12 @@ angular.module('ngPagination', [])
     restrict: 'AE',
     template: [
 '<div class="ng-pagination">',
+'  <form class="form-inline pull-left" ng-submit="onsizechange(fixPageSize(pagesize))">',
+'    <div class="form-group {{size ? \'form-group-\' + size : \'\'}}">',
+'      <label>每页显示</label>',
+'      <input type="number" ng-blur="onsizechange(fixPageSize(pagesize))" ng-model="pagesize" class="form-control pagesize"> 行',
+'    </div>',
+'  </form>',
 '  <ul class="pagination {{size ? \'pagination-\' + size : \'\'}} pull-left">',
 '    <li ng-click="prev()" ng-class="{disabled:+currentPage===1}">',
 '      <a href="#" aria-label="Previous">',
@@ -31,9 +37,11 @@ angular.module('ngPagination', [])
 '</div>'
 ].join(''),
     scope: {
-      currentPage: '=?',
       totalPages: '=',
+      currentPage: '=?',
       onchange: '=?',
+      pagesize: '=?',
+      onsizechange: '=?',
       hideInput: '=?',
       size: '@?'
     },
@@ -42,6 +50,7 @@ angular.module('ngPagination', [])
       scope.currentPage = scope.currentPage || 1;
       scope.inputPage = scope.currentPage;
       scope.onchange = scope.onchange || angular.noop;
+      scope.pagesize = scope.pagesize || 10;
 
       // 生成页辅助数组
       scope.pages = new Array(scope.totalPages);
@@ -65,6 +74,16 @@ angular.module('ngPagination', [])
         scope.currentPage = scope.currentPage < scope.totalPages ? scope.currentPage + 1 : scope.totalPages;
       };
 
+      // 限制size<500
+      scope.fixPageSize = function (size) {
+        scope.pagesize = size > 500
+          ? 500
+          : size < 1
+            ? 1
+            : size;
+        return scope.pagesize;
+      };
+
       // 判断当前页码是否需要显示
       scope._needShow = function (index) {
         // aside意为当前页码双侧各显示多少个页码
@@ -85,7 +104,7 @@ angular.module('ngPagination', [])
       // 页码变化触发onchange事件
       scope.$watch('currentPage', function (currentPage, originalPage) {
         if (currentPage != originalPage) {
-          scope.onchange(currentPage, originalPage);
+          scope.onchange(currentPage, originalPage, scope.pagesize);
           scope.inputPage = scope.currentPage;
         }
       });

@@ -17,3 +17,13 @@
     color: #333;
     text-align: center;
 }
+
+.ng-pagination .form-inline {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.ng-pagination .pagesize {
+    width: 80px;
+    text-align: center;
+}
