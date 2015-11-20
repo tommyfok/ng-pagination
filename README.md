@@ -18,7 +18,7 @@ simple pagination component
 ```
 
 - `size` 组件尺寸，可选`lg`/`sm`，留空为普通尺寸
-- `pagesize` 每页显示行数
+- `pagesize` 每页显示条数
 - `total-pages` 总页数
 - `current-page` 当前页码
 - `hide-input` 是否隐藏页码输入框

@@ -7,7 +7,7 @@ angular.module('ngPagination', [])
 '  <form class="form-inline pull-left" ng-submit="onsizechange(fixPageSize(pagesize))">',
 '    <div class="form-group {{size ? \'form-group-\' + size : \'\'}}">',
 '      <label>每页显示</label>',
-'      <input type="number" ng-blur="onsizechange(fixPageSize(pagesize))" ng-model="pagesize" class="form-control pagesize"> 行',
+'      <input type="number" ng-blur="onsizechange(fixPageSize(pagesize))" ng-model="pagesize" class="form-control pagesize"> 条',
 '    </div>',
 '  </form>',
 '  <ul class="pagination {{size ? \'pagination-\' + size : \'\'}} pull-left">',
