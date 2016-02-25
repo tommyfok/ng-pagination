@@ -4,7 +4,7 @@ angular.module('ngPagination', [])
     restrict: 'AE',
     template: [
 '<div class="ng-pagination">',
-'  <form class="form-inline pull-left" ng-submit="onsizechange(fixPageSize(pagesize))">',
+'  <form ng-if="!hidePagesize" class="form-inline pull-left" ng-submit="onsizechange(fixPageSize(pagesize))">',
 '    <div class="form-group {{size ? \'form-group-\' + size : \'\'}}">',
 '      <label>每页显示</label>',
 '      <input type="number" ng-blur="onsizechange(fixPageSize(pagesize))" ng-model="pagesize" class="form-control pagesize"> 条',
@@ -39,8 +39,10 @@ angular.module('ngPagination', [])
     scope: {
       totalPages: '=',
       currentPage: '=?',
+      aside: '=?',
       onchange: '=?',
       pagesize: '=?',
+      hidePagesize: '=?',
       onsizechange: '=?',
       hideInput: '=?',
       size: '@?'
@@ -86,8 +88,8 @@ angular.module('ngPagination', [])
 
       // 判断当前页码是否需要显示
       scope._needShow = function (index) {
-        // aside意为当前页码双侧各显示多少个页码
-        var aside = 5;
+        // aside意为当前页码双侧(不计首页和尾页)各显示多少个页码
+        var aside = scope.aside || 5;
         if (scope.totalPages < (aside * 2 + 3)) {
           return true;
         }

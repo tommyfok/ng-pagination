@@ -14,6 +14,7 @@
                     <h3>小尺寸：<small>size="sm"</small></h3>
                     <div ng-pagination
                          size="sm"
+                         aside="2"
                          onchange="onchange"
                          onsizechange="onsizechange"
                          total-pages="totalPages"
@@ -21,6 +22,8 @@
 
                     <h3>普通尺寸：</h3>
                     <div ng-pagination
+                         aside="3"
+                         hide-pagesize="true"
                          onsizechange="onsizechange"
                          total-pages="totalPages"
                          current-page="currentPage"></div>
@@ -29,6 +32,7 @@
                     <div ng-pagination
                          onsizechange="onsizechange"
                          size="lg"
+                         hide-input="true"
                          total-pages="totalPages"
                          current-page="currentPage"></div>
                 </div>
